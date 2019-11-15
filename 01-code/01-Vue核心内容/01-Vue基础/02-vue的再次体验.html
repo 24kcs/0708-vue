@@ -11,20 +11,32 @@
 </head>
 
 <body>
-	<div id="app">
-		<input type="text" v-model="msg" />
-		<p>{{msg}}</p>
-	</div>
+<div id="app">
+	<input type="text" v-model="msg" />
+	<p>{{msg}}</p>
+</div>
 </body>
 <script type="text/javascript">
-  // MVVM
-	// 实例Vue对象
+
 	const vm = new Vue({
 		el:'#app',
 		data:{
-			msg:'今天天气不错',
+			msg:'啊捏哈谁有'  // 属性
 		}
 	})
+
+
+	// vue中,双标签(成对的标签)中间显示的内容如果是动态的,请使用插值语法---{{}}
+	// 表单标签如果要显示内容,或者是获取输入的内容,通常使用v-model指定
+	// vue中标签中使用了属性和值的写法,就是键值对,但是是v-开头的,叫指令
+	// 表达式:data中的属性在html的标签中使用了,换一个叫法,叫表达式
+	// 属性:实例化Vue对象的时候,内部有一个data(实际上也是Vue的属性),data是对象,data对象内部所有的内容都是成对的,也就是键值对,我们叫属性.
+	// v-model指定:叫双向数据绑定
+	// 双向数据绑定:数据变化了,界面也随之变化,界面变化,数据也会变化
+
+
+
+ 
 
 	// 为什么没有data? Vue内部把data干掉了,把data中的属性全部的直接绑定到了vm对象上(这种方式称为:数据代理)
 	// vm代理了data

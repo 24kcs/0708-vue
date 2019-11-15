@@ -12,32 +12,50 @@
 
 <body>
   <div id="app">
-    <button @click="toggleSeen">切换效果</button>
+    <button @click="changeMsg">切换效果</button>
+    <!--事件中的代码很少,或者仅仅是修改状态数据的值,那么可以简写-->
+    <button @click="isSeen = !isSeen">切换效果</button>
     <p v-if="isSeen">我喜欢你</p>
     <p v-else>你喜欢我</p>
-    <hr>
-    <button @click="toggleShow">切换效果</button>
+
+    <hr />
+    <button @click="changeMsg2">切换效果</button>
     <p v-show="isShow">我讨厌你</p>
   </div>
   <script type="text/javascript">
+    // 实例化Vue
     const vm = new Vue({
+      // 获取容器
       el: '#app',
+      // 数据
       data: {
         isSeen: false,
-        isShow:false
+        isShow: false
       },
       methods: {
-        // 显示或者隐藏,DOM树中存在或者不存在
-        toggleSeen() {
+        // 切换的是第一个
+        changeMsg() {
           this.isSeen = !this.isSeen
         },
-        // 显示或者隐藏,DOM树中一直存在,切换的是css中的display
-        toggleShow(){
-          this.isShow=!this.isShow
+        // 切换的是第二个
+        changeMsg2() {
+          this.isShow = !this.isShow
         }
-
       }
     })
+
+    /**
+     * v-if是一个指令(单独使用)
+     * v-else是一个指令(一般配合v-if使用)
+     * v-if指令后面的表达式的值,一般情况这个表达式的值是bool类型
+     * v-if指令,对应的标签,在DOM树中有可能是不存在的
+     * v-show指令,对应的标签,在DOM树中一直存在,仅仅是切换了CSS中的display属性的值是不是none
+     *
+     *
+     */
+
+
+
 
     /**
      *

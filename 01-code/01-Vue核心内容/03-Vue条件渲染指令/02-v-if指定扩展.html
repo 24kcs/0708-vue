@@ -12,25 +12,29 @@
 
 <body>
   <div id="app">
-    <button @click="setScore">设置当前的分数</button>
+    <!-- <button @click="changeScore">设置分数级别</button> -->
+    <button @click="score='C'">设置分数级别</button>
     <p v-if="score==='A'">90到100之间</p>
     <p v-else-if="score==='B'">80到90之间</p>
     <p v-else-if="score==='C'">70到80之间</p>
-    <p v-else>60到70之间</p>
+    <p v-else-if="score==='D'">60到70之间</p>
+    <p v-else>不及格</p>
   </div>
   <script type="text/javascript">
     // 点击按钮设置分数的级别,页面显示对应级别的分数范围
+
     const vm = new Vue({
-      el: '#app',
-      data: {
-        score: 'B'
+      el:'#app',
+      data:{
+        score:'B'
       },
       methods: {
-        setScore() {
-          this.score = 'C'
+        changeScore(){
+          this.score='C'
         }
       }
     })
+   
 
     /**
      * 注意:

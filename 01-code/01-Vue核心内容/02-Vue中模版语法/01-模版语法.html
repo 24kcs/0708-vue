@@ -17,39 +17,83 @@
     <h2>{{msg.split(' ').reverse().join(' ')}}</h2>
     <!--强制数据绑定-->
     <a v-bind:href="url">百度</a>
-
     <!--强制绑定数据的简写方式:-->
     <a :href="url">百度</a>
     <!--绑定事件监听-->
-    <button v-on:click="show1">按钮</button>
-    <button @click="show2">按钮</button>
+    <button v-on:click="clickHandle">点我</button>
+    <button v-on:click="clickHandle2">继续点我</button>
+    <button v-on:click="clickHandle3">继续点我啊啊</button>
+    <button @click="showMsg">显示效果</button>
     <!--Vue中如何获取DOM元素,并进行操作-->
-    <button @click="changeInnerText">改变显示的内容</button>
-    <p ref="p1">这是p</p>
+    <button @click="changeHandle">改变显示内容</button>
+    <button @click="changeHandle2">改变内容</button>
+    <p ref="p1">健哥也很潇洒</p>
+    <p>{{msg2}}</p>
+
   </div>
   <script type="text/javascript">
     const vm = new Vue({
       el: '#app',
+      // 数据
       data: {
-        msg: 'hello world',
-        url: 'http://www.baidu.com'
+        msg: 'what are You no Sha lei',
+        url: 'http://www.baidu.com',
+        msg2: '嘎嘎'
       },
+      // 方法的---很多的方法
       methods: {
-        // 
-        show1: function () {
-          console.log('第一个按钮', this)
+        clickHandle: function () {
+          // this---Vue的实例对象
+          console.log('我被点了', this)
         },
-        show2: () => {
-          console.log('第二个按钮', this)
+        clickHandle2: () => {
+          // this----window对象
+          console.log('我也被点了', this)
         },
-        show3() {
-          console.log('第三按钮', this)
+        // 简写的方式-----Vue中非常推荐的写法
+        clickHandle3() {
+          console.log('啊,华哥喝多啦', this)
         },
-        changeInnerText() {
-          this.$refs.p1.innerText = '改变了'
+
+        // 最终的写法
+        showMsg() {
+          console.log('终极写法', this)
+        },
+
+        // 点击按钮,修改p标签中的显示内容
+        changeHandle() {
+          // 轻易不用------Vue尽量不操作DOM元素,而是修改数据
+          this.$refs.p1.innerText = '哈哈,我又变帅了'
+        },
+        changeHandle2() {
+          this.msg2 = '哈哈'
+          console.log(this)
         }
+
       }
+
     })
+
+
+    /**
+     * 强制数据绑定: 指定:  v-bind:属性名字="表达式"
+     * v-on:是一个指令,绑定事件的,后面跟着的是一个函数(也是一个方法),需要在Vue的配置对象中的methods对象中定义
+     * v-on绑定的事件对应的回调函数需要在methods中书写,但是这个函数定义的时候,可以写function函数,不能写箭头函数,因为this指定会发生改变
+     *
+     * 最终总结:
+     * v-bind----->写法:    :属性名字="表达式"
+     * v-on------>写法:     @小写事件名字="方法"
+     * 
+     * Vue中有数据代理------Vue的源码分析中可以知道原理
+     * 数据代理:本身这个对象没有这个属性,但是通过代理的方式,该对象就有了这个属性
+     * 
+     * 模版语法:指的是静态页面中使用到的vue的相关的语法
+     *
+     *
+     */
+
+
+
     /**
      * v-bind--->属性,但是是v-开头,在Vue中叫指令,
      * v-bind指令的作用:强制绑定数据,为当前的属性里面绑定一个值(数据)

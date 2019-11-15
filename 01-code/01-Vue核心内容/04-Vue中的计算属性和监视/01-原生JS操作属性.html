@@ -11,36 +11,47 @@
 
 <body>
   <script type="text/javascript">
-    // 需求:某个属性的值改变,相关联的属性的值会自动发生改变
-    const person = {
-      firstName: '东方',
-      lastName: '不败'
-    }
+    // 需求:某个属性的值改变,相关联的属性的值会自动发生改变----vue中的计算属性
 
-    // 原生JS实现
+    const person = {
+      firstName: '东方', // 姓氏
+      lastName: '不败' // 名字
+    }
+    // 实现这个需求
+    // 作用:为某个对象,添加一个属性,并配置这个属性
+    /**
+     * 
+     * 参数1: 对象
+     * 参数2: 要添加的属性的名字
+     * 参数3: 该属性的配置对象
+     * 
+     */
     Object.defineProperty(person, 'fullName', {
-      configurable: false, //该属性是否可以被重新设置
-      enumerable: false, // 是否可以被枚举
-      // value:'哈哈_' , // 默认值
-      // writable:true , // 属性值是否可以被修改
+      configurable: false,  // 默认值是false,该属性是否可以被重新设置
+      enumerable: true, // 默认值是false,该属性是否可以被枚举---遍历
+      // value:'哈_哈', // 设置该属性的默认值
+      // writable:true, // 默认值是false,表示该属性的值是否可以被重写
       get() {
+        // 该属性的值的获取操作,当在外部使用console.log(对象.fullName)就会进入这个方法内部 
         return this.firstName + '_' + this.lastName
       },
-      set(value) {
-        const name = value.split('_')
+      set(val) {
+        // 该属性的值的设置操作,当在外部使用对象.fullName='值',就会进入这个方法内部
+        const name = val.split('_')
         this.firstName = name[0]
         this.lastName = name[1]
       }
+
     })
 
     person.fullName = person.firstName + '_' + person.lastName
-    console.log(person.fullName)
-    // 修改firstName和lastName
+    console.log(person.fullName) // 东方_不败
     person.firstName = '诸葛'
     person.lastName = '孔明'
-    console.log(person.fullName)// 不变
+    console.log(person.fullName)// 东方_不败
     person.fullName = '欧阳_华哥'
-    console.log(person.firstName, person.lastName)// 不变
+    console.log(person.firstName, person.lastName) // 诸葛  孔明
+
 
     // 如何解决?
     // Object.defineProperty

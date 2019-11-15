@@ -22,7 +22,7 @@
     <fieldset>
       <legend>单向和双向操作</legend>
       姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName1"><br />
-      姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName2" ><br />
+      姓名(单向操作):<input type="text" placeholder="显示姓名"><br />
       姓名(双向操作):<input type="text" placeholder="显示姓名" v-model="fullName3"><br />
     </fieldset>
 
@@ -34,41 +34,28 @@
       el: '#app',
       data: {
         firstName: '东方',
-        lastName: '不败',
-        fullName2:''
+        lastName: '不败'
       },
-      // 计算属性,一个属性的值发生变化,相关联的属性值会自动的变化,此时使用计算属性
+      // 计算属性
       computed: {
-        // get操作,firstName或者是lastName的值发生变化,会直接返回给fullName
+        // 是一个方法,实际上是属于一个get方法
         fullName1() {
           return this.firstName + '_' + this.lastName
         },
-        // 如果当前的属性需要同时使用get和set操作,那么此时需要定义对象,内部定义get和set
         fullName3: {
+          // 获取
           get() {
             return this.firstName + '_' + this.lastName
           },
+          // 设置
           set(val) {
             const name = val.split('_')
             this.firstName = name[0]
             this.lastName = name[1]
           }
         }
-      },
-      // 监视---实现fullName2,监视就是一个属性值发生变化,想要做相关的操作
-      watch: {
-        firstName(val){
-          this.fullName2=val+'_'+this.lastName
-        }
       }
     })
-    // 外部可以通过Vue的实例对象调用watch方法进行监视
-    vm.$watch('lastName',function (val){
-      // 不要使用箭头函数,否则this指向会发生变化
-      console.log(this)
-      this.fullName2=this.lastName+'_'+val
-    })
-
 
     /**
      * Vue中通过计算属性的方式实现:某个属性的值发生改变,相关联的属性的值会自动的发生改变
