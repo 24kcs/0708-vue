@@ -12,23 +12,24 @@
 	<div id="app">
 		<fieldset>
 			<legend>style操作:style中书写的时候有多个值,采用对象写法</legend>
-			<p :style="{color:fontColor,fontSize:fontSize}">坚持不懈</p>
+			<p :style="{color:myColor,fontSize:myFontSize,fontFamily:myFamily}">坚持不懈</p>
 		</fieldset>
 		<fieldset>
-			<legend>style操作:动态操作设置键值,采用数组写法</legend>
-			<p :style="[fontColor2,fontSize2]">努力拼搏</p>
+			<legend>style操作:动态操作设置键值,采用数组写法,数组中的每一项都是键值对</legend>
+			<p :style="[myColor1,myFont1]">努力拼搏</p>
 		</fieldset>
 	</div>
 	<script type="text/javascript">
-			const vm = new Vue({
-				el:'#app',
-				data:{
-					fontColor:'red',
-					fontSize:'30px',
-					fontColor2:{color:'pink'},
-					fontSize2:{fontSize:'40px'}
-				}
-			})
+		const vm = new Vue({
+			el:'#app',
+			data:{
+				myColor:'green',
+				myFontSize:'30px',
+				myFamily:'全新硬笔行书简',
+				myColor1:{color:'red'},
+				myFont1:{fontSize:'30px'}
+			}
+		})
 		
 		/**
 		 * Vue中style属性操作标签的样式的方式:

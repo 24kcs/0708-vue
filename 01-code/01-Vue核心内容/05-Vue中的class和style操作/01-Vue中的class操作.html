@@ -42,8 +42,8 @@
 		</fieldset>
 		<fieldset>
 			<legend>class绑定:使用对象的方式(cls是类名,固定的写法(写的肯定是类名,后面跟的是布尔值))</legend>
-			<p :class="{cls1:isClas1}">不乱于心,不困于情</p>
-			<button @click="isClas1=!isClas1">改变样式</button>
+			<p :class="{cls:isFlag}">不乱于心,不困于情</p>
+			<button @click="isFlag=!isFlag">改变样式</button>
 		</fieldset>
 		<fieldset>
 			<legend>class绑定:使用数组方式([]里面是动态的属性,需要在data中定义)</legend>
@@ -51,7 +51,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>class绑定:动态绑定和静态绑定结合</legend>
-			<p class="cls2" :class="myClass">不念过去,不畏将来</p>
+			<p class="cls" :class="clsC">不念过去,不畏将来</p>
 		</fieldset>
 		<fieldset>
 			<legend>class绑定:静态绑定,使用动态的方式绑定数据,同时内部使用静态值</legend>
@@ -62,21 +62,26 @@
 	<p id="p1"></p>
 	<script type="text/javascript">
 		const vm = new Vue({
-			el:'#app',
-			data:{
-				myClass:'cls',
-				isClas1:false,
+			el: '#app',
+			data: {
+				myClass: 'cls',
+				isFlag:false, // 表示的是当前的这个标签是否要使用某个类样式
 				clsA:'cls1',
 				clsB:'cls2',
 				clsC:'cls3'
+			},
+			// 方法
+			methods: {
+				// changeClass() {
+				// 	this.myClass = 'cls1'
+				// }
 			}
-			
 		})
-		
+
 
 		/**
-		 * 
-		 * 
+		 *
+		 *
 		 * Vue中的样式操作,有两种方式:
 		 * 1.class的方式
 		 * 		1.直接使用表达式的方式,:class="myClass"
@@ -85,9 +90,9 @@
 		 *    4. class="cls2" :class="myClass"
 		 *    5.:class="['cls1','cls2','cls3']"
 		 * 2.style的方式
-		 * 
-		 * 
-		 * 
+		 *
+		 *
+		 *
 		 */
 	</script>
 

@@ -22,11 +22,9 @@
     <fieldset>
       <legend>单向和双向操作</legend>
       姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName1"><br />
-      姓名(单向操作):<input type="text" placeholder="显示姓名"><br />
+      姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName2"><br />
       姓名(双向操作):<input type="text" placeholder="显示姓名" v-model="fullName3"><br />
     </fieldset>
-
-
   </div>
   <script type="text/javascript">
     // 实例化
@@ -34,7 +32,8 @@
       el: '#app',
       data: {
         firstName: '东方',
-        lastName: '不败'
+        lastName: '不败',
+        fullName2: '' // 默认名字是一个空字符串
       },
       // 计算属性
       computed: {
@@ -54,7 +53,24 @@
             this.lastName = name[1]
           }
         }
+      },
+
+      // 监视:当一个属性的值发生变化,我需要做一些相关的操作
+      watch: {
+        // val就是firstName的值
+        firstName(val) {
+          this.fullName2 = val + '_' + this.lastName
+        },
+        // lastName(val) {
+        //   this.fullName2 = this.firstName + '_' + val
+        // }
       }
+
+    })
+    // 使用监视
+    vm.$watch('lastName',function(val){
+      console.log(this)
+      this.fullName2 = this.firstName + '_' + val
     })
 
     /**

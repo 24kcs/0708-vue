@@ -14,44 +14,48 @@
     <fieldset>
       <legend>遍历数组</legend>
       <ol>
-        <li v-for="(item,index) in persons" :key="index">
-          索引:{{index}}---id:{{item.id}}----名字:{{item.name}}----年龄:{{item.age}}
-        </li>
+        <!--item是数组中的每一项,index是索引-->
+       <li v-for="(item,index) in persons" :key="index">
+         索引:{{index}}----id:{{item.id}}---名字:{{item.name}}---年龄:{{item.age}}
+       </li>
       </ol>
       <hr>
       <ul>
-       <li v-for="item in persons" :key="index">
-        id:{{item.id}}----名字:{{item.name}}----年龄:{{item.age}}
-       </li>
+        <li v-for="item in persons" :key="item.id">
+            id:{{item.id}}---名字:{{item.name}}---年龄:{{item.age}}
+        </li>
       </ul>
     </fieldset>
     <hr>
     <fieldset>
       <legend>遍历对象</legend>
       <ul>
-       <li v-for="(val,key,index) in obj">
-         {{key}}------{{val}}-----{{index}}
-       </li>
+        <li v-for="(val,key,index) in obj" :key="index">
+          {{key}}------{{val}}-----{{index}}
+        </li>
       </ul>
     </fieldset>
   </div>
 <script type="text/javascript">
+  
   const vm = new Vue({
     el:'#app',
     data:{
       persons:[
-        { id:1,name:'自来也',age:18 },
-        { id:2,name:'卡卡西',age:19 },
-        { id:3,name:'大蛇丸',age:23 },
-        { id:4,name:'纲手',age:13 }
+        {id:1,name:'自来也',age:45},
+        {id:2,name:'大蛇丸',age:44},
+        {id:3,name:'纲手',age:43},
+        {id:4,name:'鸣人',age:18}
       ],
       obj:{
-        name:'小明',
-        age:20,
-        desc:'好人'
+        name:'华哥殿下',
+        age:38,
+        gender:'女'
       }
     }
   })
+
+
   /*
   
     循环遍历数据------>通过v-for指令遍历vm实例对象中的相关数据
