@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+    // 需求:某个属性的值改变,相关联的属性的值会自动发生改变
+    const person = {
+      firstName: '东方',
+      lastName: '不败'
+    }
+
+    // 原生JS实现
+    Object.defineProperty(person, 'fullName', {
+      configurable: false, //该属性是否可以被重新设置
+      enumerable: false, // 是否可以被枚举
+      // value:'哈哈_' , // 默认值
+      // writable:true , // 属性值是否可以被修改
+      get() {
+        return this.firstName + '_' + this.lastName
+      },
+      set(value) {
+        const name = value.split('_')
+        this.firstName = name[0]
+        this.lastName = name[1]
+      }
+    })
+
+    person.fullName = person.firstName + '_' + person.lastName
+    console.log(person.fullName)
+    // 修改firstName和lastName
+    person.firstName = '诸葛'
+    person.lastName = '孔明'
+    console.log(person.fullName)// 不变
+    person.fullName = '欧阳_华哥'
+    console.log(person.firstName, person.lastName)// 不变
+
+    // 如何解决?
+    // Object.defineProperty
+    // 为某个对象添加一个新的属性,或者修改该对象现有的属性的值
+    /**
+     *
+     * 三个参数:
+     * 参数1: 哪个对象
+     * 参数2: 添加什么属性? 属性的名字
+     * 参数3: 配置对象---->好多的键值对
+     * get(){},如果将来在外部使用了person.fullName--->此时就会进入到get方法内部,并且把结果返回
+     * console.log(person.fullName)--->读取该属性的操作,就会进入到get内部,获取结果
+     * set(){},如果将来在外部为fullName属性赋值了,那么就会进入set内部,就会把fullName属性的值拆分,分别赋值给firstName和lastName
+     *
+     * 获取---get操作----想要得到该属性的值的时候,都会进入到get中
+     * 设置---set操作----想要给属性赋值,那么就会进入set中
+     *
+     *
+     */
+
+  </script>
+</body>
+
+</html>

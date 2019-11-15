@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--插值语法:-->
+    <h2>{{msg}}</h2>
+    <h2>{{msg.toUpperCase()}}</h2>
+    <h2>{{msg.split(' ').reverse().join(' ')}}</h2>
+    <!--强制数据绑定-->
+    <a v-bind:href="url">百度</a>
+
+    <!--强制绑定数据的简写方式:-->
+    <a :href="url">百度</a>
+    <!--绑定事件监听-->
+    <button v-on:click="show1">按钮</button>
+    <button @click="show2">按钮</button>
+    <!--Vue中如何获取DOM元素,并进行操作-->
+    <button @click="changeInnerText">改变显示的内容</button>
+    <p ref="p1">这是p</p>
+  </div>
+  <script type="text/javascript">
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello world',
+        url: 'http://www.baidu.com'
+      },
+      methods: {
+        // 
+        show1: function () {
+          console.log('第一个按钮', this)
+        },
+        show2: () => {
+          console.log('第二个按钮', this)
+        },
+        show3() {
+          console.log('第三按钮', this)
+        },
+        changeInnerText() {
+          this.$refs.p1.innerText = '改变了'
+        }
+      }
+    })
+    /**
+     * v-bind--->属性,但是是v-开头,在Vue中叫指令,
+     * v-bind指令的作用:强制绑定数据,为当前的属性里面绑定一个值(数据)
+     * v-bind指令作用:如果想要把数据(一个值,动态的值)存储到一个属性中,那么可以使用v-bind指令
+     * v-bind指令可以简写-----> :属性名字="表达式"----->属性名字="值"
+     * 总结:任何的属性都可以通过强制绑定数据的方式进行值的保存
+     * v-on:click----->
+     * v-on是一个属性,在Vue中叫指令
+     * v-on指令作用:绑定事件监听
+     * v-on:事件的名字="回调函数"--->注意问题:事件名字是没有on的
+     * methods:{}是一个对象,使用到的所有的方法一般都是在methods对象中定义的,每个方法之间使用逗号隔开,methods对象中的方法定义的时候都是以键值对的方式进行定义的
+     * v-on指令可以简写:-------->@事件名字="回调函数"
+     *
+     * 总结:
+     * v-model指令:双向数据绑定,一般用在表单标签上
+     * v-bind指令:强制绑定数据的,一般用于属性进行值的保存操作,可以简写---->:属性名字="表达式"
+     * v-on指令:绑定事件监听的-----可以简写---->@事件名字="回调函数"
+     *
+     * Vue中是可以获取DOM对象,然后进行操作的,但是一般不是特别多(项目中会使用该方式来获取DOM对象)
+     * 1.首先在要获取的html标签上使用  ref属性  ,用法:   ref="值", 值就相当于是id属性的值
+     * 2.在Vue的实例对象内部的相关的操作的方法中,直接使用vm(this).$refs.值, ---->值就是上面ref属性的值--->此时可以直接获取该DOM元素对象,并进行操作
+     *
+     *
+     *
+     */
+
+
+
+
+
+    /**
+     * 插值:双大括号,内部使用的是表达式,
+     * data对象中的内容为属性和值之间的关系,模版中插值内的内容为表达式(就是data中定义的属性),
+     * 如果想要使用表达式,则该表达式需要在实例化Vue对象的时候内部有定义过
+     * 强制数据绑定:在标签中通过属性的方式进行值的存储或者操作(可以这么理解:把值存放在一个属性中,但是值是动态的)
+     * 通过v-bind这个指令进行强制绑定数据
+     * 简写:
+     * v-bind简写为-------> :
+     * 如:--------->  :href="表达式"
+     * methods:是一个对象,该对象内部可以定义多个方法,所以加了s为复数形式
+     * 内部方法之间定义使用逗号隔开,另外,方法的定义可以使用es5也可以使用es6
+     * 注意:methods中的方法如果使用的是箭头函数,那么内部的this是window对象
+     * v-on这个指定用来做事件监听操作
+     * v-on简写为--------> @
+     * 如:--------->  @click="回调函数"
+     *
+     * Vue中如何获取DOM元素?
+     * 在标签内容使用ref属性=值的方式,在Vue内部通过this.$refs对象.值的方式即可获取该DOM元素
+     *
+     *
+     */
+  </script>
+</body>
+
+</html>

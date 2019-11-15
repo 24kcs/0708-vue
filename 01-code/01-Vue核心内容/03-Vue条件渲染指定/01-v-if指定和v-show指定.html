@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+    <button @click="toggleSeen">切换效果</button>
+    <p v-if="isSeen">我喜欢你</p>
+    <p v-else>你喜欢我</p>
+    <hr>
+    <button @click="toggleShow">切换效果</button>
+    <p v-show="isShow">我讨厌你</p>
+  </div>
+  <script type="text/javascript">
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        isSeen: false,
+        isShow:false
+      },
+      methods: {
+        // 显示或者隐藏,DOM树中存在或者不存在
+        toggleSeen() {
+          this.isSeen = !this.isSeen
+        },
+        // 显示或者隐藏,DOM树中一直存在,切换的是css中的display
+        toggleShow(){
+          this.isShow=!this.isShow
+        }
+
+      }
+    })
+
+    /**
+     *
+     * 在Vue中,一般情况,指令后面的值几乎都是动态的
+     * v-if指令作用:设置当前html模版中的某个标签显示或者是不显示(代表的是当前的这个标签在DOM树中存在还是不存在的操作)
+     * v-if指令可以单独使用,也可以配合v-else指令一起使用
+     * v-if指令后面的值是动态的,该值是布尔类型,结果要么是true要么是false
+     * v-show指令一般都是单独使用,作用:设置标签显示还是隐藏,v-show后面的值是一个表达式,表达式的值是动态的,该值是布尔类型,结果要么是true要么是false,代表着当前使用v-show指令的标签显示还是隐藏
+     * v-show和v-if的区别
+     * 使用v-show指令的标签在DOM树中是存在,只不过设置了style中的display的值是不是none,页面中是否显示
+     * 使用v-if指令的标签在DOM树中是不一定存在,
+     *
+     *
+     */
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>每天都被自己帅醒!</title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<fieldset>
+			<legend>数组数据更新操作</legend>
+			<button @click="addPerson">添加数据</button><br />
+			名字:<input type="text" v-model="name" /><br />
+			年龄:<input type="text" v-model="age" /><br />
+			描述:<input type="text" v-model="desc" /><br />
+			<ul>
+				<li v-for="(per,index) in teachers" :key="index">
+					索引:{{index}}---id:{{per.id}}----名字:{{per.name}}----年龄:{{per.age}}---描述:{{per.desc}}
+					<button @click="delPerson(index)">删除</button>
+					&nbsp;
+					<button @click="updatePerson(index,{id:++perId,name,age,desc})">更新</button>
+				</li>
+			</ul>
+		</fieldset>
+	</div>
+	<script type="text/javascript">
+		// 定义相关的数据通过v-for指令进行遍历,显示数据
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				perId: 10,
+				name: '', // 默认空
+				age: 0, // 默认0
+				desc: '', // 默认空
+				teachers: [
+					{ id: 1, name: '华哥', age: 20, desc: '风流倜傥' },
+					{ id: 2, name: '健哥', age: 21, desc: '一表人才' },
+					{ id: 3, name: '强哥', age: 18, desc: '玉树临风' },
+					{ id: 4, name: '明哥', age: 14, desc: '英俊潇洒' }
+				]
+			},
+			methods: {
+				// 添加
+				addPerson() {
+					const person = {
+						id: ++this.perId,
+						name: this.name,
+						age: this.age,
+						desc: this.desc
+					}
+					this.teachers.push(person)
+					this.name = ''
+					this.age = ''
+					this.desc = ''
+				},
+				// 删除
+				delPerson(index) {
+					this.teachers.splice(index, 1)
+				},
+				// 更新
+				updatePerson(index, per) {
+					this.teachers[index].id = per.id
+					this.teachers[index].name = per.name
+					this.teachers[index].age = per.age
+					this.teachers[index].desc = per.desc
+				}
+			}
+		})
+
+	</script>
+</body>
+
+</html>

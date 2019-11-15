@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>玉树临风美少年，揽镜自顾夜不眠 </title>
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+	<!--容器-->
+	<div id="app">
+		<!--模版-->
+		<p>{{msg}}</p>
+	</div>
+	<script type="text/javascript">
+	  // 实例化一个Vue对象 ，参数是一个对象,对象内主要是配置内容
+		const vm = new Vue({
+			// el----->element:元素
+			// 根据选择器获取对应的容器中的相关的模版
+			el:'#app',
+			// 数据的相关操作
+			data:{
+				// 属性和值之间的关系
+				msg:'测试'
+			}
+		})
+
+		/**
+		 * data是一个对象,所有的数据的相关的属性一般都放在data中
+		 * data中定义的属性,在html模版中使用的时候,此时的这个属性叫表达式
+		 * html模版中{{msg}}---->双大括号是插值语法,msg--->表达式
+		 * 注意:表达式在使用的时候,前提肯定是定义过
+		 * 
+		 */
+	</script>
+</body>
+
+</html>
