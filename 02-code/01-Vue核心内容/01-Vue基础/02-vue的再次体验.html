@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>每天都被自己帅醒!</title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+	<input type="text" v-model="msg" />
+	<p>{{msg}}</p>
+</div>
+</body>
+<script type="text/javascript">
+
+	const vm = new Vue({
+		el:'#app',
+		data:{
+			msg:'啊捏哈谁有'  // 属性
+		}
+	})
+
+
+	// vue中,双标签(成对的标签)中间显示的内容如果是动态的,请使用插值语法---{{}}
+	// 表单标签如果要显示内容,或者是获取输入的内容,通常使用v-model指定
+	// vue中标签中使用了属性和值的写法,就是键值对,但是是v-开头的,叫指令
+	// 表达式:data中的属性在html的标签中使用了,换一个叫法,叫表达式
+	// 属性:实例化Vue对象的时候,内部有一个data(实际上也是Vue的属性),data是对象,data对象内部所有的内容都是成对的,也就是键值对,我们叫属性.
+	// v-model指定:叫双向数据绑定
+	// 双向数据绑定:数据变化了,界面也随之变化,界面变化,数据也会变化
+
+
+
+ 
+
+	// 为什么没有data? Vue内部把data干掉了,把data中的属性全部的直接绑定到了vm对象上(这种方式称为:数据代理)
+	// vm代理了data
+	// Vue中有数据代理
+	// Vue的源码分析的时候去看内部是如何实现数据代理的
+
+	/**
+	 * 
+	 * html中div的id是app-----html中容器
+	 * id为app的div内部的所有的html内容---->模版
+	 * 
+	 * new Vue({
+	 * el:'#app' ----->根据选择器获取html中对应的容器,目的是为了操作容器中模版的内容
+	 * data:{}------>对象,相关的数据都会在data中定义,data中的内容一般都是键值对的方式,里面的内容是属性和值之间的关系,
+	 * html模版中可以直接使用data对象中定义的属性(目的是为了使用该属性的值)
+	 * {{msg}}----->插值语法:(msg是表达式)
+	 * v-model:首先是一个属性,但是由于是v-开头的,在Vue中v-开头叫指令,v-model指令作用:双向数据绑定
+	 * v-model="msg"  后面的值是动态的,是一个表达式
+	 * 双向数据绑定:表达式的值更变了,界面会发生改变,界面变了,数据的值也会自动的随之改变
+	 * vm可以直接点msg---->坑---->看上面的数据代理
+	 * Vue中也有双向数据绑定:v-model="表达式"
+	 * 
+	 * 
+	 * })
+	 * 
+	 * 
+	 * 
+	 */
+
+</script>
+
+</html>

@@ -17,28 +17,26 @@
 			<fieldset>
 				<legend>帐号和密码</legend>
 				<!--在文本框中添加一个v-model-->
-				用户名: <input type="text" v-model="user.userName"><br />
-				密码: <input type="password" v-model="user.userPwd"><br />
+				用户名: <input type="text" v-model="user.name"><br />
+				密码: <input type="password" v-model="user.pwd" ><br />
 			</fieldset>
 			<fieldset>
 				<legend>性别选择器</legend>
-				<input type="radio" name="gender" value="男" v-model="user.gender">男
-				<input type="radio" name="gender" value="女" v-model="user.gender">女
+				<input type="radio" name="gender" value="男" v-model="user.gender" />男
+				<input type="radio" name="gender" value="女"  v-model="user.gender" />女
 
 			</fieldset>
 			<fieldset>
 				<legend>爱好选择</legend>
-				<input type="checkbox" value="eat" v-model="user.hobby">吃饭
-				<input type="checkbox" value="sleep" v-model="user.hobby">睡觉
-				<input type="checkbox" value="play" v-model="user.hobby">打豆豆
+				<input type="checkbox" value="eat" v-model="user.hobby" />吃饭
+				<input type="checkbox" value="sleep" v-model="user.hobby" />睡觉
+				<input type="checkbox" value="play" v-model="user.hobby" />打豆豆
 			</fieldset>
 			<fieldset>
 				<legend>城市选择和文本内容</legend>
 				<select v-model="user.cityId">
 					<optgroup label="中国">
-						<option v-for="(item,index) in user.citys" :key="index" :value="item.id">
-							{{item.name}}
-						</option>
+						<option v-for="(c,index) in user.cities" :key="index" :value="c.id">{{c.name}}</option>
 					</optgroup>
 				</select>
 				<br />
@@ -48,44 +46,32 @@
 		</form>
 	</div>
 	<script type="text/javascript">
-		const vm = new Vue({
-			el: '#app',
-			data: {
-				user:{
-					// 包含了多个数据
-					userName:'', // 用户名
-					userPwd:'', // 密码
-					gender:'女', // 性别
-					hobby:['eat','play'], // 兴趣爱好
-					cityId:4,
-					citys:[
-						{id:1,name:'北京'},
-						{id:2,name:'上海'},
-						{id:3,name:'重庆'},
-						{id:4,name:'天津'},
-						{id:5,name:'首尔'},
-						{id:6,name:'东京'}
-					],
-					info:'这是一个文本域标签内容'
-				}
-			},
-			methods: {
-				register() {
-					console.log('用户名:'+this.user.userName+',密码:'+this.user.userPwd)
-				}
+	const vm = new Vue({
+		el:'#app',
+		data:{
+			user:{
+				name:'', // 用户名
+				pwd:'', // 密码
+				gender:'女' , // 性别
+				hobby:['play','eat'], // 爱好
+				cityId:3, // 城市id
+				cities:[
+					{id:1,name:'北京'},
+					{id:2,name:'上海'},
+					{id:3,name:'天津'},
+					{id:4,name:'重庆'},
+					{id:5,name:'深圳'},
+				],
+				info:'啊哈哈'
 			}
-		})
-
-
-		/**
-		 *
-		 * 练习v-model双向数据绑定的指令
-		 *
-		 * v-model一般都是用在表单的标签上
-		 *
-		 *
-		 */
-
+		},
+		methods: {
+			register(){
+				console.log(this.user.name,this.user.pwd)
+			}
+		}
+	})
+	
 
 	</script>
 </body>

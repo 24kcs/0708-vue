@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>每天都被自己帅醒!</title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<fieldset>
+			<legend>数据排序及相关操作</legend>
+			<input type="text" v-model="searchName" />
+			<ul>
+				<li v-for="(per,index) in personArr" :key="index">
+					索引:{{index}}---id:{{per.id}}-----名字:{{per.name}}----年龄:{{per.age}}
+				</li>
+			</ul>
+			<button @click="state=1">升序排序</button>
+			<button @click="state=2">降序排序</button>
+			<button @click="state=0">原来顺序</button>
+		</fieldset>
+	</div>
+	<script type="text/javascript">
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				searchName: '', // 用户输入的数据
+				state: 0, // 默认的排序的状态数据
+				persons: [
+					{ id: 1, name: 'jack', age: 34 },
+					{ id: 2, name: 'tom', age: 14 },
+					{ id: 3, name: 'lucy', age: 57 },
+					{ id: 4, name: 'rousi', age: 28 }
+				]
+			},
+			computed: {
+				// get操作
+				personArr() {
+					const { persons, searchName, state } = this
+					// 获取搜索到的数据
+					const arr = persons.filter(per => per.name.indexOf(searchName) !== -1)
+					// 判断状态数据
+					if (state !== 0) {
+						// 排序了
+						arr.sort((p1, p2) => {
+							return state === 2 ? p2.age - p1.age : p1.age - p2.age
+						})
+					}
+					// 返回排序后的数据
+					return arr
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>

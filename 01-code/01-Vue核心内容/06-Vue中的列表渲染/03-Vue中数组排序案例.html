@@ -22,34 +22,35 @@
 			</ul>
 			<button @click="state=1">升序排序</button>
 			<button @click="state=2">降序排序</button>
-			<button @click="state=3">原来顺序</button>
+			<button @click="state=0">原来顺序</button>
 		</fieldset>
 	</div>
 	<script type="text/javascript">
 		const vm = new Vue({
 			el: '#app',
 			data: {
-				state: 0, // 标识状态
 				searchName: '',
+				state: 0,
 				persons: [
-					{ id: 1, name: 'jack', age: 20 },
-					{ id: 2, name: 'tom', age: 50 },
-					{ id: 3, name: 'lucy', age: 18 },
-					{ id: 4, name: 'rousi', age: 30 },
+					{ id: 1, name: 'jack', age: 23 },
+					{ id: 2, name: 'tom', age: 40 },
+					{ id: 3, name: 'lucy', age: 17 },
+					{ id: 4, name: 'rousi', age: 34 }
 				]
 			},
 			computed: {
 				personArr() {
-					const { state, searchName, persons } = this
-					const arr = persons.filter(item => item.name.indexOf(searchName) !== -1)
-					if (state != 0) {
+					const { state, persons, searchName } = this
+					const arr = persons.filter((item)=>item.name.indexOf(searchName)!==-1)
+					console.log(arr)
+					if (state !== 0) {
 						arr.sort((p1, p2) => {
 							return state === 2 ? p2.age - p1.age : p1.age - p2.age
 						})
 					}
-
 					return arr
 				}
+
 			}
 		})
 

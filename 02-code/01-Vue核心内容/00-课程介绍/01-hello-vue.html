@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script src="https://cdn.bootcss.com/vue/2.6.9/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p> {{msg}}</p>
+    <p v-show="isShow">哈哈</p>
+  </div>
+  <script type="text/javascript">
+    // 渐进式: 本身实现的功能是有限的,但是相关联的插件(包)有很多,如果需要实现什么功能,那么可以使用相关联的包,来实现
+    // v-show:是vue中的一个指令,用来控制某个元素是显示还是隐藏的
+    // ok:是一个属性
+    // 创建Vue的实例对象
+    // vm---------v----view--视图    m-------model---数据
+    // MVVM-------M---Model  V---view  vm----Vue的实例对象
+    // const vm= new Vue({
+    //   el:'#app',
+    //   data:{
+    //     msg:'我勒个去'
+    //   }
+    // })
+    new Vue({
+      // element-----容器对象-----id为app的div容器
+      el: '#app',
+      // 数据:---大多数情况,放在容器对象中使用的数据
+      data: {
+        // 键值的关系
+        msg: '我勒个去',
+        // ok:true
+        isShow:false
+      }
+    })
+  </script>
+</body>
+
+</html>

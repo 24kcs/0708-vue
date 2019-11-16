@@ -12,33 +12,32 @@
 
 <body>
     <div id="app">
-        <button @click="clear">干掉vm和定时器</button>
-        <p v-show="isShow">哈哈</p>
+      <button @click="clear">干掉vm和定时器</button>
+      <p v-show="isShow">哈哈</p>
     </div>
     <script type="text/javascript">
-     const vm = new Vue({
-         el:'#app',
-         data:{
-             isShow:false
-         },
-         // 销毁vm实例对象之前先干掉定时器
-         beforeDestroy () {
-           clearInterval(this.timeId)  
-         },
-         // 界面显示后
-         mounted () {
-             this.timeId=setInterval(() => {
-                 this.isShow=!this.isShow
-                 console.log('我是定时器')
-             }, 1000);
-         },
-         methods: {
-             clear(){
-                 // 销毁vm实例对象
-                 this.$destroy()
-             }
-         }
-     })
+    const vm = new Vue({
+        el:'#app',
+        data:{
+            isShow:false
+        },
+        beforeDestroy () {
+          clearInterval(this.timeId)  
+        },
+        // 界面加载后
+        mounted () {
+            this.timeId=setInterval(()=>{
+                this.isShow=!this.isShow
+                console.log('定时器')
+            },1000)
+        },
+        methods: {
+            clear(){
+                this.$destroy()
+            }
+        }
+    })
+  
     </script>
 </body>
 

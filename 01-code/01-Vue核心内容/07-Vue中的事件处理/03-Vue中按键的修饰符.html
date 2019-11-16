@@ -12,9 +12,9 @@
 
 <body>
 	<div id="app">
-		<input type="text" value="" v-model="msg" @keyup="keyupHandle">
-		<input type="text" value="" v-model="msg" @keyup.enter="keyupHandle2">
-		<input type="text" value="" v-model="msg" @keyup.13="keyupHandle3">
+	<input type="text" v-model="msg" @keyup="keyupHandle" />
+	<input type="text" v-model="msg" @keyup="" />
+	<input type="text" v-model="msg" @keyup="" />
 	</div>
 	<script type="text/javascript">
 		const vm = new Vue({
