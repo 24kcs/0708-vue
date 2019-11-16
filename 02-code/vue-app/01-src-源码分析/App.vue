@@ -6,10 +6,13 @@
 </template>
 
 <script>
+// 引入组件
 import HelloWorld from './components/HelloWorld'
-
+// 向外部暴露当前这个组件对象
 export default {
+  // 当前组件的名字
   name: 'App',
+  // 注册组件
   components: {
     HelloWorld
   }

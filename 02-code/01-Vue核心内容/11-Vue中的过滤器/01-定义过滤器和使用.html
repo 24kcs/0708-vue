@@ -16,9 +16,10 @@
 		<h2>{{time}}</h2>
 		<h2>{{time|formatTime}}</h2>
 		<h2>{{time|formatTime2}}</h2>
+		<h2>{{time|formatTime3('YY-MM-DD')}}</h2>
 	</div>
 
-	<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.js"></script>
+	<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
 	<script type="text/javascript">
 		/**
 		 * Vue1.0中有自己的过滤器:filter
@@ -42,20 +43,31 @@
 		 * 
 		 * 
 		*/
-		//定义过滤器:
+		//定义过滤器:---格式化
 
-		Vue.filter('formatTime', value => {
-			return moment(value).format('YYYY-MM-DD hh:mm:ss')
+		Vue.filter('formatTime', (time) => {
+			// 过滤器,格式化日期
+			return moment(time).format('YYYY-MM-DD hh:mm:ss');
 		})
-		Vue.filter('formatTime2',(value,formatString='YYYY-MM-DD hh:mm:ss')=>{
-			return moment(value).format(formatString)
+
+		Vue.filter('formatTime2', (time,str='YYYY-MM-DD') => {
+			// 过滤器,格式化日期
+			return moment(time).format(str);
 		})
+
+		Vue.filter('formatTime3', (time,str) => {
+			// 过滤器,格式化日期
+			return moment(time).format(str||'YYYY-MM-DD');
+		})
+
 		const vm = new Vue({
 			el: '#app',
 			data: {
 				time: Date.now()
 			}
 		})
+
+
 
 		// Vue.filter('formatTime1', (value) => {
 		// 	return moment(value).format('YYYY-MM-DD hh:mm:ss');

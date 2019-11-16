@@ -2,14 +2,16 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-// 设置浏览器的控制台中是否有警告提示
+
+// 在浏览器的控制台中是否需要提示信息
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
+  // 容器---index.html
   el: '#app',
-  // 定义组件
+  // 注册组件
   components: { App },
-  // 设置模版
+  // 模版---使用的是App组件的这个模版
   template: '<App/>'
 })

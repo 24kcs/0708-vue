@@ -12,28 +12,46 @@
 
 <body>
     <div id="app">
-        <p v-my-directive="msg"></p>
+       <p v-my-directive="msg"></p>
     </div>
-   <script src="./vue-myPlugin.js"></script>
+    <script src="./vue-myPlugin.js"></script>
     <script type="text/javascript">
+
         /**
          * Vue中的插件
          * https://cn.vuejs.org/v2/guide/plugins.html
-         * 
-         * 
+         *
+         *
          * Vue.use()内部会安装插件,内部调用install
-         * 
+         *
          */
         //声明使用Vue的插件:MyPlugin
         Vue.use(MyPlugin)
         Vue.myGlobalMethod()
+        // 实例的方法的使用
         const vm = new Vue({
             el:'#app',
             data:{
-                msg:'哈哈,我又变帅了'
+                msg:'华哥今晚有安排'
             }
         })
         vm.$myMethod()
+
+
+
+
+
+
+
+        // Vue.use(MyPlugin)
+        // Vue.myGlobalMethod()
+        // const vm = new Vue({
+        //     el:'#app',
+        //     data:{
+        //         msg:'哈哈,我又变帅了'
+        //     }
+        // })
+        // vm.$myMethod()
 
         // Vue.use(myPlugin)   
         // Vue.myGlobalMethod()

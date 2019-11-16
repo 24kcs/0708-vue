@@ -1,38 +1,27 @@
-// (function (window) {
-// 	const myPlugin = {}
-// 	// 暴露该方法
-// 	myPlugin.install = function (Vue) {
-// 		// 添加一个全局方法
-// 		Vue.myGlobalMethod = function () {
-// 			console.log('全局方法调用')
-// 		}
-// 		// 添加一个全局的资源--指令
-// 		Vue.directive('my-directive', (el, binding) => {
-// 			el.textContent = 'my-directive' + '======' + binding.value
-// 		})
-// 		// 添加一个实例方法
-// 		Vue.prototype.$myMethod = function () {
-// 			console.log('实例对象调用')
-// 		}
-// 	}
-// 	window.myPlugin = myPlugin
-// })(window)
-
 (function (window) {
-	// 定义对象
+	// 自己定义插件
 	const MyPlugin = {}
-	MyPlugin.install = function (Vue) {
+	MyPlugin.install = function (Vue, options) {
+		// 1. 添加全局方法或属性
 		Vue.myGlobalMethod = function () {
+			// 逻辑...
 			console.log('全局方法')
 		}
-		// 添加一个全局的资源指令
-		Vue.directive('my-directive', (el, binding) => {
-			el.textContent = 'my-directive' + '======' + binding.value
+		// 2. 添加全局资源
+		Vue.directive('my-directive', {
+			bind (el, binding, vnode, oldVnode) {
+				el.innerHTML=binding.value+'========'
+			}
 		})
-		// 添加一个实例方法
-		Vue.prototype.$myMethod = function () {
-			console.log('实例对象方法')
+		// 4. 添加实例方法
+		Vue.prototype.$myMethod = function (methodOptions) {
+			// 逻辑...
+			console.log('实例方法')
 		}
 	}
+
+	// 暴露给window
 	window.MyPlugin = MyPlugin
 })(window)
+
+// 沙箱,沙盒,黑盒---函数的自调用

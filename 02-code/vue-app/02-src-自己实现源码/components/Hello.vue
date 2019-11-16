@@ -1,14 +1,15 @@
 <template>
   <div>
-    <p>这是子级组件</p>
+    <p>华哥</p>
   </div>
 </template>
 <script>
 export default {
+  name: 'Hello'
 }
 </script>
-<style scoped>
-p{
-  color:red;
+<style>
+p {
+  color: green;
 }
 </style>

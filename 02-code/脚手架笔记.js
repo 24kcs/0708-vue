@@ -1,3 +1,11 @@
+// npm install -g vue-cli 全局安装脚手架
+// vue init webpack my-project 下载相关的模版
+// cd my-project
+// 运行:  npm run dev----npm start
+// 打包:  npm run build 
+// dist目录才是真正的打包后的文件
+// 运行打包文件:   serve dist 
+
 /**
  * eslint检查的问题
  * build目录是webpack的相关的设置
@@ -19,4 +27,7 @@
  * 组件:具有一定功能效果的集合,里面包含html+css+js
  * 抽取了多个的组件,就形成了组件化
  * 源码的分析:
+ * 
+ * 
+ * scoped:有可能会影响父子级组件之间的样式
  */

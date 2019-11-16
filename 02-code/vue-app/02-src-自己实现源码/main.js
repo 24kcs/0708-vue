@@ -1,15 +1,19 @@
 // 引入Vue
 import Vue from 'vue'
-// 引入父级组件
+// 引入组件
 import App from './App.vue'
-// 设置控制台中是否有警告提示
+// 可写可不写
+// 设置当前提示信息在浏览器的控制台中是否显示
 Vue.config.productionTip = false
-// 实例化对象
+// 创建Vue的实例对象
 /* eslint-disable no-new */
 new Vue({
+  // 找容器对象
   el: '#app',
+  // 注册组件
   components: {
     App
   },
+  // 使用模版
   template: '<App/>'
 })
