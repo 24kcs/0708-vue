@@ -1,0 +1,136 @@
+<template>
+  <div class="todo-container">
+    <div class="todo-wrap">
+      <Header @addTodo="addTodo" />
+      <!-- <List :todos="todos" :deleteTodo="deleteTodo" :toggleTodo="toggleTodo" /> -->
+      <!--使用消息订阅直线删除todo操作-->
+      <!-- <List :todos="todos" :toggleTodo="toggleTodo" /> -->
+      <!--实现总线实现todo切换-->
+       <List :todos="todos" />
+      <!-- <Footer :todos="todos" :checkAll="checkAll" /> -->
+      <Footer>
+        <label slot="left">
+          <input type="checkbox" v-model="isCheck" />
+        </label>
+        <span slot="center">
+          <span>已完成{{count}}</span>
+          / 全部{{todos.length}}
+        </span>
+        <button slot="right" class="btn btn-danger" v-show="count>0">清除已完成任务</button>
+      </Footer>
+    </div>
+  </div>
+</template>
+<script>
+// 引入Header组件
+import Header from './components/Header.vue'
+// 引入List组件
+import List from './components/List.vue'
+// 引入Footer组件
+import Footer from './components/Footer.vue'
+// 引入utils
+import storage from './utils/utils.js'
+// 暴露出去的是当前组件对象(整个组件就是一个对象,组件对象内部使用了this,是该组件的实例对象)
+// function Person(){}
+// var per = new Person()
+// 引入PubSub
+import PubSub from 'pubsub-js'
+export default {
+  mounted() {
+    this.token = PubSub.subscribe('deleteTodo', (msg, data) => {
+      this.deleteTodo(data)
+    }),
+    // 事件总线实现切换
+    this.$bus.$on('toggleTodo',(todo)=>{
+      this.toggleTodo(todo)
+      console.log('执行了')
+    })
+  },
+
+  // 组件卸载前
+  beforeDestroy() {
+    PubSub.unsubscribe(this.token);
+  },
+  computed: {
+    count() {
+      return this.todos.reduce(
+        (pre, todo) => pre + (todo.isCompleted ? 1 : 0),
+        0
+      )
+    },
+    isCheck: {
+      get() {
+        return this.count === this.todos.length && this.count > 0
+      },
+      set(val) {
+        this.checkAll(val)
+      }
+    }
+  },
+
+  // 数据操作的功能
+  methods: {
+    // 添加数据
+    addTodo(todo) {
+      // 插入到前面显示
+      this.todos.unshift(todo)
+    },
+    // 删除数据
+    deleteTodo(index) {
+      this.todos.splice(index, 1)
+    },
+    // 切换选中
+    toggleTodo(todo) {
+      todo.isCompleted = !todo.isCompleted
+    },
+    // 选中所有
+    checkAll(flag) {
+      this.todos.forEach(todo => {
+        return (todo.isCompleted = flag)
+      })
+    }
+  },
+  // 设置当前组件的名字
+  name: 'App',
+  // 存储数据的-----注意:脚手架中的data是一个方法,不是之前对象
+  data() {
+    return {
+      // todos: [
+      //   { id: 1, title: '华哥', isCompleted: false },
+      //   { id: 2, title: '健哥', isCompleted: true },
+      //   { id: 3, title: '强哥', isCompleted: false }
+      // ]
+      //todos:JSON.parse(localStorage.getItem('todos_key'))||[]
+      todos: storage.getTodos()
+    }
+  },
+  // 注册组件
+  components: {
+    Header,
+    List,
+    Footer
+  },
+  watch: {
+    todos: {
+      deep: true,
+      // handler(val){
+      //   // localStorage.setItem('todos_key',JSON.stringify(this.todos))
+      //   storage.setTodos(val)
+      // }
+      handler: storage.setTodos
+    }
+  }
+}
+</script>
+<style scoped>
+/*app*/
+.todo-container {
+  width: 600px;
+  margin: 0 auto;
+}
+.todo-container .todo-wrap {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+</style>
