@@ -1,8 +1,8 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <Header :addTodo="addTodo" />
-      <List :todos="todos" :deleteTodo="deleteTodo" :toggleTodo="toggleTodo" />
+      <Header @addTodo="addTodo" />
+      <List :todos="todos" />
       <Footer :todos="todos" :checkAllTtodos="checkAllTtodos" />
     </div>
   </div>
@@ -19,26 +19,47 @@ import Footer from './components/Footer.vue'
 // var per = new Person()
 // 引入utils
 import storage from './utils/utils.js'
+// 引入PubSub
+import PubSub from 'pubsub-js'
 export default {
+  // 界面加载完毕
+  mounted() {
+    console.log(this)
+    // 消息的订阅
+    ;(this.token = PubSub.subscribe('deleteTodo', (msg, data) => {
+      this.deleteTodo(data)
+    })),
+      // 界面加载后,使用事件总线的方式进行事件的绑定
+      this.$bus.$on('toggleTodo', todo => {
+        this.toggleTodo(todo)
+      })
+  },
+  // 组件被销毁之前
+  beforeDestroy() {
+    // 取消消息订阅
+    PubSub.unsubscribe(this.token)
+    // 解绑事件
+    this.$bus.$off('toggleTodo')
+  },
   // 数据操作的功能
   methods: {
     // 添加数据
-    addTodo(todo){
+    addTodo(todo) {
       // 插入到前面显示
       this.todos.unshift(todo)
     },
     // 删除数据
-    deleteTodo(index){
-      this.todos.splice(index,1)
+    deleteTodo(index) {
+      this.todos.splice(index, 1)
     },
     // 切换选中
-    toggleTodo(todo){
-      todo.isCompleted=!todo.isCompleted
+    toggleTodo(todo) {
+      todo.isCompleted = !todo.isCompleted
     },
     // 设置todos中的每个todo的isCompleted的结果
-    checkAllTtodos(flag){
-      this.todos.forEach(todo=>{
-        todo.isCompleted=flag
+    checkAllTtodos(flag) {
+      this.todos.forEach(todo => {
+        todo.isCompleted = flag
       })
     }
   },
@@ -47,13 +68,7 @@ export default {
   // 存储数据的-----注意:脚手架中的data是一个方法,不是之前对象
   data() {
     return {
-      // todos: [
-      //   { id: 1, title: '华哥', isCompleted: false },
-      //   { id: 2, title: '健哥', isCompleted: true },
-      //   { id: 3, title: '强哥', isCompleted: false }
-      // ]
-      //  todos: JSON.parse(localStorage.getItem('todos_key')||'[]')
-       todos: storage.getTodos()
+      todos: storage.getTodos()
     }
   },
   // 注册组件
@@ -63,15 +78,9 @@ export default {
     Footer
   },
   watch: {
-    todos:{
-      deep:true,  // 深度监视
-      // handler:function(val){
-      //   // 做相关的操作
-      //   // 缓存数据
-      //   //localStorage.setItem('todos_key',JSON.stringify(this.todos))
-      //   storage.setTodos(val)
-      // }
-       handler:storage.setTodos
+    todos: {
+      deep: true, // 深度监视
+      handler: storage.setTodos
     }
   }
 }

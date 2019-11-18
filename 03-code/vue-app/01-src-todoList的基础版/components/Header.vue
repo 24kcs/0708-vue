@@ -7,7 +7,6 @@
 export default {
   methods: {
     add() {
-      console.log(this)
       // 获取文本框的数据,并去掉空格
       const title = this.title.trim()
       if (title) {
@@ -17,9 +16,7 @@ export default {
           title,
           isCompleted: false
         }
-        // 分发
-        this.$emit('addTodo',todo)
-        // this.addTodo(todo)
+        this.addTodo(todo)
         // 清空文本框
         this.title = ''
       }
@@ -35,10 +32,10 @@ export default {
   // 限定传过来的数据的类型
   props: {
     // 以对象的方式进行设置
-    // addTodo: {
-    //   type: Function, // 类型
-    //   required: true // 是否是必须的
-    // }
+    addTodo: {
+      type: Function, // 类型
+      required: true // 是否是必须的
+    }
   }
 }
 </script>

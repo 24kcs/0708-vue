@@ -12,8 +12,6 @@
   </li>
 </template>
 <script>
-// 引入PubSub
-import PubSub from 'pubsub-js'
 export default {
   data() {
     return {
@@ -28,8 +26,7 @@ export default {
         return this.todo.isCompleted
       },
       set(){
-        this.$bus.$emit('toggleTodo',this.todo)
-        // this.toggleTodo(this.todo)
+        this.toggleTodo(this.todo)
       }
     }
   },
@@ -52,10 +49,7 @@ export default {
     delTodo(){
       // 提示
       if(confirm('确定删除吗')){
-        // 删除操作
-        // 发布消息
-        PubSub.publish('deleteTodo',this.index)
-        //this.deleteTodo(this.index)
+        this.deleteTodo(this.index)
       }
     }
   },
@@ -64,11 +58,11 @@ export default {
     // 限定todo是Object类型的
     todo: Object,
     // 限定deleteTodo是Function类型的
-    // deleteTodo:Function,
+    deleteTodo:Function,
     // 限定index是Number类型的
     index:Number,
     // 限定toggleTodo是Function类型
-    // toggleTodo:Function
+    toggleTodo:Function
   }
 }
 </script>

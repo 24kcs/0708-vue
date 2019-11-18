@@ -1,6 +1,6 @@
 <template>
   <ul class="todo-main">
-    <Item v-for="(todo,index) in todos" :key="index" :todo="todo" :index="index" />
+    <Item v-for="(todo,index) in todos" :key="index" :todo="todo" :deleteTodo="deleteTodo" :index="index" :toggleTodo='toggleTodo' />
   </ul>
 </template>
 <script>
@@ -9,11 +9,7 @@ import Item from './Item.vue'
 export default {
   name: 'List',
   // 此时todos这个数据就直接传入到了List组件中了,而且使用todos的时候,不需要加props,直接this.todos就可以了
-  // props: ['todos','deleteTodo','toggleTodo'],
-  // 消息订阅的操作----删掉了deleteTodo
-  // props: ['todos','toggleTodo'],
-  // 事件总线的方式
-    props: ['todos'],
+  props: ['todos','deleteTodo','toggleTodo'],
   components: {
     Item
   },
