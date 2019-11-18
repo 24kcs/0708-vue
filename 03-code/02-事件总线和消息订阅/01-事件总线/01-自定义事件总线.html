@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <script src="./EventBus.js"></script>
+</head>
+
+<body>
+  <!-- <button id="btn">按钮</button> -->
+  <script type="text/javascript">
+   // 绑定
+    EventBus.on('add',(data)=>{
+      console.log('add调用了',data)
+    })
+    EventBus.on('add',(data)=>{
+      console.log('add调用了2',data)
+    })
+    EventBus.on('del',(data)=>{
+      console.log('del调用了啦啦啦啦',data)
+    })
+
+    // 解绑
+    EventBus.off()
+    // 分发
+    EventBus.emit('add','123')
+    EventBus.emit('del','4567890')
+
+
+    // function my$(id) {
+    //   return document.getElementById(id)
+    // }
+    // my$('btn').onclick= function () {
+    //   console.log('被点了1')
+    // }
+    // my$('btn').onclick = function () {
+    //   console.log('被点了2')
+    // }
+
+    // 同一个事件可以绑定多个回调  
+    // 同一个事件不能同时注册多次,
+
+    // my$('btn').addEventListener('click', function () {
+    //   console.log('1')
+    // }, false)
+    // my$('btn').addEventListener('click', function () {
+    //   console.log('2')
+    // }, false)
+    // my$('btn').addEventListener('click', function () {
+    //   console.log('3')
+    // }, false)
+    // my$('btn').attachEvent('onclick',function(){
+
+    // })
+
+
+  </script>
+</body>
+
+</html>

@@ -9,12 +9,23 @@
 </head>
 <body>
   <script type="text/javascript">
+  // 订阅消息
   var token=PubSub.subscribe('add',(data)=>{
-    console.log('订阅了:'+data)
+    console.log('add消息',data)
   })
+  PubSub.subscribe('add',(data)=>{
+    console.log('add消息2',data)
+  })
+  PubSub.subscribe('del',(data)=>{
+    console.log('del消息1',data)
+  })
+  // 取消
   PubSub.unsubscribe(token)
-  PubSub.publish('add','真好')
-  PubSub.publishSync('add','真好')
+  // 发布消息
+  PubSub.publish('add','123')
+  //PubSub.publishSync('add','1234')
+  PubSub.publish('del','1234567890')
+
   </script>
 </body>
 </html>
