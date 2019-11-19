@@ -1,20 +1,34 @@
 <template>
-  <div class="container">
-    <Search/>
-    <Main/>
+  <div>
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-8">
+        <div class="page-header">
+          <h2>Router Basic - 01</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
+         
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel">
+          <div class="panel-body">
+          
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-// 引入组件
-import Search from './components/Search.vue'
-import Main from './components/Main.vue'
 export default {
-  name: 'App',
-  // 注册组件
-  components: {
-    Search,
-    Main
-  }
+  /**
+   *
+   *
+   */
 }
 </script>
 <style scoped>
