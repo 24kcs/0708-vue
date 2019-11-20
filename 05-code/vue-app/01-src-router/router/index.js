@@ -1,22 +1,17 @@
-/* 
-Vue的路由器对象
-*/
+// 引入Vue
 import Vue from 'vue'
+// 引入VueRouter
 import VueRouter from 'vue-router'
+import routes from './routes.js'
+// 声明使用VueRouter
+Vue.use(VueRouter)
 
-import routes from './routes'
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
-// 声明使用vue插件
-Vue.use(VueRouter)
-
-export default VueRouter({
-  // 路由模式
-  mode: 'history', // 不带#
-
-  // 配置应用中所有路由
+export default new VueRouter({
+  mode: 'history',
   routes
-})
 
+})

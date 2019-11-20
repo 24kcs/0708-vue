@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>04_模板解析_表达式_vue</title>
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+</head>
+<body>
+<div id="app">
+  <p>{{msg}}</p>
+</div>
+<script type="text/javascript">
+  const vm = new MVVM({
+    el:'#app',
+    data:{
+      msg:'abc',
+    }
+  })
+  //属性:vm实例对象中都是属性----data对象中的属性
+  //表达式:模版中(上面的html中用到的属性,叫表达式)
+  //模版解析:打开页面中,页面初始化的时候,直接把相对应的表达式,指令,事件，进行解析,最终以真正的html的效果进行展示
+
+
+  // * 前面的表达式出现了0次到多次    //\d*  '123123'
+  // + 前面的表达式出现了1次到多次
+  // ? 前面的表达式出现了0次到1次
+  // \d 任意的一个数字  [0-9]
+  // \D 非数字
+  //  \s  空白符              
+  // \S 非空白符  
+
+
+  // \d{0,}
+  // \d{1,}
+  // \d{0,1}
+  // \d{,10} 错误写法
+
+
+  // /[0-9a-zA-Z-_.]+[@][0-9a-zA-Z-_.]+([a-zA-Z]+){1,2}/
+
+  // /\{\{(.*)\}\}/
+
+  //   RegExp.$1.trim()
+
+  
+
+</script>
+</body>
+</html>
