@@ -1,51 +1,47 @@
+// 构造函数
 function MVVM(options) {
-    // options----->传入的配置对象{el:'',data:'',methods:{},computed:{}}
-    // 把配置对象保存到$options属性
+    // options---配置对象---
+    // 把配置对象保存起来
     this.$options = options || {};
-    // 把data中数据保存到两个地方,data局部变量,this._data中
+    // 获取data对象,并保存起来, data变量和_data中存储的就是vm.data数据
     var data = this._data = this.$options.data;
-    // 保存当前的实例对象(MVVM的实例,可以看成是Vue)
+    // 把vm实例对象保存到me变量中
     var me = this;
-
-    // 数据代理
-    // 把data中所有的属性全部进行遍历,key----属性的名字
+    // 遍历vm.data中所有的键----key--msg
     Object.keys(data).forEach(function(key) {
-        // 真正的数据代理的实现
+        // 实现数据代理操作
         me._proxyData(key);
     });
-
+    // 计算属性的
     this._initComputed();
-
+    // 劫持-----------------------后天分析
     observe(data, this);
-
+    // 今天分析----编译---初始化操作
     this.$compile = new Compile(options.el || document.body, this)
 }
-// 原型对象
+// 原型
 MVVM.prototype = {
-    // 构造器
     constructor: MVVM,
-    // 监视
     $watch: function(key, cb, options) {
         new Watcher(this, key, cb);
     },
-    // 真正的数据代理
-    // 
+    // 实现代理
     _proxyData: function(key, setter, getter) {
-        // 把当前的实例对象再次保存到me中
+        // 把vm实例保存到me变量中
         var me = this;
+        // 为vm添加的是data对象中的属性
         setter = setter || 
         Object.defineProperty(me, key, {
-            // 把key中的属性直接给了this,this.msg
-            // me--this,key---'msg'
             configurable: false,
             enumerable: true,
-            // 重写get
             get: function proxyGetter() {
-                return me._data[key]; // 如果有vm.msg----就会进来
+                // 把_data中的msg的值获取,返回给vm.msg属性
+                return me._data[key];
             },
-            // 重写set
             set: function proxySetter(newVal) {
-                me._data[key] = newVal; // vm.msg='值' ----就会进来
+                // vm.msg='新的值'---进入到set
+                // 把新的值给了vm._data.msg属性
+                me._data[key] = newVal;
             }
         });
     },
