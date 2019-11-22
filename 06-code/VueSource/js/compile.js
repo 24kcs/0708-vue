@@ -171,6 +171,7 @@ var compileUtil = {
 
         // 先不看---监视---源码中需要配合劫持一起实现数据变化,界面变化的操作
         new Watcher(vm, exp, function(value, oldValue) {
+            // 只要是更新操作,就会执行这个函数
             updaterFn && updaterFn(node, value, oldValue);
         });
     },

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>07_数据劫持-数据绑定</title>
@@ -8,26 +9,105 @@
       * 初始化显示: 页面(表达式/指令)能从data读取数据显示 (编译/解析)
       * 更新显示: 更新data中的属性数据==>页面更新
   -->
-  <script src="../js/mvvm/mvvm.js"></script>
-  <script src="../js/mvvm/compile.js"></script>
-  <script src="../js/mvvm/observer.js"></script>
-  <script src="../js/mvvm/watcher.js"></script>
- 
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+
 </head>
+
 <body>
-    <div id="app">
-        <p>{{msg}}</p>
-        <p v-text="msg"></p>
-       </div>
-       <script type="text/javascript">
-         const vm = new MVVM({
-           el:'#app',
-           data:{
-             msg:'<a href="http://www.baidu.com">百度</a>'
-           },
-         })
-         //模版解析初始化页面的
-       </script>
+  <div id="app">
+  <p>{{msg}}</p>
+  <button v-on:click="changeMsg">修改值</button>
+  </div>
+  <script type="text/javascript">
+    const vm = new MVVM({
+      el: '#app',
+      data: {
+        msg:'真好'
+      
+        // msg: '真好',
+        // msg2:'很好'
+        // car:{
+        //   name:'宝马',
+        //   color:'red'
+        // }
+       
+        // msg: '<a href="http://www.baidu.com">百度</a>'
+      },
+      methods: {
+        changeMsg(){
+          this.msg='很好'
+        }
+      }
+    })
+
+    // data中一个属性就会对应一个dep,dep内部的id是唯一的,还有自己的subs=[]数组
+    // 一个属性就有一个dep
+    // 一个表达式就有一个watcher
+    // 一个dep对应一个watcher    1对1关系
+    // 一个dep对应多个watcher    1对多关系
+    // 多个dep对应一个watcher    多对1关系
+    // 多个dep对应多个watcher    多对多的关系
+
+
+
+   //模版解析初始化页面的
+
+
+
+
+   /**
+    * 
+    * .   除了\n以外任意一个单个字符   
+    * 正则表达式,有规则的式子,用来匹配的
+    * 正则表达式中,元字符和限定符
+    * 元字符:  [] |  + *
+    * 限定符: [0-9]+
+    * [0-9]
+    * [a-z]
+    * [A-Z]
+    * 
+    * 
+    * [0-9a-zA-Z]
+    * 数字,字母,特殊符号
+    * 
+    * \d----数字中的一个
+    * \D----非数字中的一个
+    * \s----空白符号
+    * \S----非空白符号
+    * \w----非特殊符号_
+    * \W----特殊符号
+    * 
+    * ^  以什么开始,或者取非
+    * $---以什么结尾
+    * 
+    * |或
+    * [0-9]*-----0次到多次
+    * [0-9]+-----1次到多次
+    * [0-9]?-----0次到1次
+    * 
+    * [0-9]{0,} 0次到多次
+    * [0-9]{1,} 1次到多次
+    * [0-9]{0,1} 0次到1次
+    * [0-9]{,10} 错误写法
+    * 
+    * ()----分组,提升优先级
+    *  [.]  或者  \.
+    * 邮箱的正则:
+    * [0-9a-zA-Z_.-]+[@][0-9a-zA-Z_.-]+([.][a-zA-Z]+){1,2}
+    * 
+    * 
+    * 
+    * 
+    * 
+    * 
+    * 
+    */
+
+  
+  </script>
 </body>
 
 </html>

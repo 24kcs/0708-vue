@@ -15,7 +15,7 @@ function MVVM(options) {
     });
 
     this._initComputed();
-
+    // 劫持---------把data劫持走了,遍历data中所有的属性,产生对应个数的dep,
     observe(data, this);
 
     // 模版编译---模版解析,传入了当前的选择器: #app,或者是body标签,并传入vm实例对象
