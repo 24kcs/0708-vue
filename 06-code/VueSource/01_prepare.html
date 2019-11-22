@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <!-- <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul> -->
+
+  <div id="demo">
+    <p>测试1</p>
+    <p>测试1</p>
+    <p>测试1</p>
+    <p>测试1</p>
+  </div>
+  <hr>
+  <script type="text/javascript">
+    // 1. 伪数组转真数组
+    // const list1 = document.getElementsByTagName('li')
+    // const list2 = [...list1]
+    // const list3 = Array.from(list1)
+    // const list4 = Array.prototype.slice.call(list1)
+    // const list5 = [].slice.call(list1)
+    // console.log(list1 instanceof Array)
+    // console.log(list2 instanceof Array)
+    // console.log(list3 instanceof Array)
+    // console.log(list4 instanceof Array)
+    // console.log(list5 instanceof Array)
+
+    // 2. node.nodeType:DOM节点类型
+
+    // const eleNode=document.getElementById('demo')
+    // const attrNode=eleNode.getAttributeNode('id')
+    // const txtNode=eleNode.firstChild
+    // console.log(eleNode.nodeType)
+    // console.log(attrNode.nodeType)
+    // console.log(txtNode.nodeType)
+
+    // 标签，元素, 节点
+
+    // 文档对象模型-----Document Object Model
+
+    // html---标签
+    // 标签也叫元素
+    // 节点:标签(html,script,style),文本(文字,空格),属性(标签中的属性名字)
+
+
+    // 3. Object.definePrototype()
+    // const person = {
+    //   firstName: '东方',
+    //   lastName: '不败'
+    // }
+    // // 为某个对象添加一个属性,并设置属性的操作
+    // Object.defineProperty(person, 'fullName', {
+    //   configurable: true, // 默认是false,该属性不能被重新定义或修改
+    //   enumerable: false, // 默认是false,该属性是否可以枚举遍历
+    //   // value:'哈_哈',
+    //   // writable:true, // 默认是false,是否可以修改值
+    //   get() {
+    //     return this.firstName + '_' + this.lastName
+    //   },
+    //   set(val) {
+    //     const name = val.split('_')
+    //     this.firstName = name[0]
+    //     this.lastName = name[1]
+    //   }
+    // })
+    // person.fullName = person.firstName + '_' + person.lastName
+    // console.log(person.fullName)
+    // person.fullName = '诸葛_孔明'
+    // console.log(person.firstName, person.lastName)
+
+    // const keys=Object.keys(person)
+    // console.log(keys)
+    // for(var key in person){
+    //   console.log(key,person[key])
+    // }
+
+    //对象.hasOwnProperty(prop)
+    // const result1=person.hasOwnProperty('fullName')
+    // const result2=person.hasOwnProperty('toString')
+    // console.log(result1)
+    // console.log(result2)
+
+
+    // 文档碎片对象模型
+
+    // 创建文档碎片对象
+    const fragment = document.createDocumentFragment()
+    // 获取div容器,并找到里面所有的子节点
+    const divObj = document.getElementById('demo')
+    let child
+    // 遍历子节点,全部扔进碎片对象中
+    while (child = divObj.firstChild) {
+      fragment.appendChild(child)
+    }
+    // 遍历碎片对象中的所有的子节点,修改数据
+    fragment.childNodes.forEach(child => {
+      child.innerHTML = '哈哈'
+    })
+    // 把碎片对象扔进div容器中
+    divObj.appendChild(fragment)
+
+
+
+
+
+
+
+
+
+    // 1. 伪数组转真数组
+    // const list1 = document.getElementsByTagName('li')
+    // const list2 = [...list1]
+    // const list3 = Array.from(list1)
+    // const list4 = Array.prototype.slice.call(list1)
+    // const list5 = [].slice.call(list1)
+    // console.log(list1 instanceof Array)
+    // console.log(list2 instanceof Array)
+    // console.log(list3 instanceof Array)
+    // console.log(list4 instanceof Array)
+    // console.log(list5 instanceof Array)
+    // // 2. node.nodeType:DOM节点类型
+    // const eleNode = document.getElementById('demo')
+    // const attrNode = eleNode.getAttributeNode('id')
+    // const txtNode = eleNode.firstChild
+    // console.log(eleNode.nodeType)
+    // console.log(attrNode.nodeType)
+    // console.log(txtNode.nodeType)
+    // // 3. Object.definePrototype()
+    // const person = {
+    //   firstName: '东方',
+    //   lastName: '不败'
+    // }
+    // Object.defineProperty(person, 'fullName', {
+    //   configurable: true, // 可以重新定义属性,也可以被删除
+    //   enumerable: false, // 可以枚举遍历
+    //   // value:'哈哈',
+    //   // writable:true , // 可以修改
+    //   get() {
+    //     return this.firstName + '-' + this.lastName
+    //   },
+    //   set(val) {
+    //     const name = val.split('-')
+    //     this.firstName = name[0]
+    //     this.lastName = name[1]
+    //   }
+    // })
+    // person.fullName = '诸葛-孔明'
+    // console.log(person.firstName, person.lastName)
+    // // 4. Object.keys
+    // const keys=Object.keys(person)
+    // console.log(keys)
+    // for(var key in person){
+    //   console.log(key,person[key])
+    // }
+    // // 5. 对象.hasOwnProperty(prop)
+    // console.log(person.hasOwnProperty('fullName'))
+    // console.log(person.hasOwnProperty('toString'))
+
+    // // 6.DocumentFragment: 文档碎片(高效批量更新多个节点)
+    // // 创建文档碎片对象模型
+    // const fragment = document.createDocumentFragment()
+    // // 获取容器
+    // const divObj=document.getElementById('demo')
+    // // 把容器中所有的节点全部的放在文档碎片对象模型中
+    // let child
+    // while(child=divObj.firstChild){
+    //   fragment.appendChild(child)
+    // }
+    // // 遍历文档碎片中的所有的节点,进行替换操作
+    // fragment.childNodes.forEach(node=>{
+    //   node.innerHTML='哈哈'
+    // })
+    // // 把文档碎片添加到父级容器中
+    // divObj.appendChild(fragment)
+
+  </script>
+
+</body>
+
+</html>
