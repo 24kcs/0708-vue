@@ -1,0 +1,12 @@
+.cls {
+  width: 300px;
+  height: 200px;
+  border: 2px solid #f00;
+}
+.cls.active {
+  background-color: #ffc0cb;
+}
+.cls p {
+  color: #008000;
+  font: 32px '全新硬笔行书简';
+}
