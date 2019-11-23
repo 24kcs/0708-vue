@@ -30,6 +30,55 @@ body .app .content {
   width: 100%;
   height: 100%;
 }
+html .app .content section,
+body .app .content section {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+}
+html .app .content section.on,
+body .app .content section.on {
+  display: block;
+}
+html .app .content section .swiper-container,
+body .app .content section .swiper-container {
+  height: 200px;
+}
+html .app .content section .swiper-container .swiper-slide,
+body .app .content section .swiper-container .swiper-slide {
+  height: 180px;
+  *zoom: 1;
+}
+html .app .content section .swiper-container .swiper-slide .slideItem,
+body .app .content section .swiper-container .swiper-slide .slideItem {
+  float: left;
+  width: 25%;
+  height: 50%;
+}
+html .app .content section .swiper-container .swiper-slide .slideItem a,
+body .app .content section .swiper-container .swiper-slide .slideItem a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+html .app .content section .swiper-container .swiper-slide .slideItem a img,
+body .app .content section .swiper-container .swiper-slide .slideItem a img {
+  width: 50px;
+  height: 50px;
+  margin-top: 20px;
+}
+html .app .content section .swiper-container .swiper-slide .slideItem a .itemText,
+body .app .content section .swiper-container .swiper-slide .slideItem a .itemText {
+  font-size: 13px;
+}
+html .app .content section .swiper-pagination-bullet-active,
+body .app .content section .swiper-pagination-bullet-active {
+  background-color: #02a774;
+}
 html .app .footer,
 body .app .footer {
   position: relative;
