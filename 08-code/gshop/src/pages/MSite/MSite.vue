@@ -120,18 +120,34 @@
         </div>
       </nav>
       <!--首页附近商家-->
-      <ShopList/>
+      <ShopList />
     </section>
   </div>
 </template>
 <script>
 // 引入组件
 import ShopList from '../../components/ShopList/ShopList.vue'
+// 引入Swiper
+import Swiper from 'swiper'
+// 引入Swiper的样式文件
+import 'swiper/css/swiper.css'
+
 export default {
   name: 'MSite',
   // 注册组件
-  components:{
+  components: {
     ShopList
+  },
+  // 界面显示之后
+  mounted() {
+    // 坑============================================
+    new Swiper('.swiper-container', {
+      loop: true, // 循环模式选项
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination'
+      }
+    })
   }
 }
 </script>
