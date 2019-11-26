@@ -15,7 +15,7 @@
               <section class="shop_detail_header">
                 <h4 class="shop_title ellipsis">{{shop.name}}</h4>
                 <ul class="shop_detail_ul">
-                  <li class="supports" v-for="(support,index) in shops.supports" :key="index">{{support.icon_name}}</li>
+                  <li class="supports" v-for="(support,index) in shop.supports" :key="index">{{support.icon_name}}</li>
                 </ul>
               </section>
               <section class="shop_rating_order">

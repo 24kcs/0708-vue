@@ -9,6 +9,8 @@ import store from './store'
 import Header from './components/Header/Header.vue'
 // 引入Star
 import Star from './components/Star/Star.vue'
+// 引入表单验证的插件
+import './vee-validate'
 // 注册成全局组件(在任何组件中可以直接使用,可以叫公共组件)
 Vue.component(Header.name, Header)
 Vue.component(Star.name, Star)

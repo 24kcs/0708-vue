@@ -15,11 +15,16 @@ export default {
 
   },
   // 获取分类信息
-  async getCategorys ({ commit }) {
+  async getCategorys ({ commit },cb) {
     const result = await reqCategorys()
     if (result.code === 0) {
       const categorys = result.data
       commit(RECEIVE_CATEGORYS, categorys)
+      typeof cb==='function'&&cb()
+      // if(typeof cb==='function'){
+      //   cb()
+      // }
+
     }
   },
   // 获取商铺列表信息
