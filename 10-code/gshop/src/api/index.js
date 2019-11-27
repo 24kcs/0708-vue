@@ -5,7 +5,13 @@ const BASE = '/api'
 // 根据经纬度获取位置详情
 export const reqAddress = ({ longitude, latitude }) => ajax.get(BASE + `/position/${latitude},${longitude}`)
 // 获取食品分类列表
-export const reqCategorys = () => ajax.get(BASE + `/index_category`)
+export const reqCategorys = () => ajax({
+  method:'GET',
+  url:BASE + `/index_category`,
+  // headers:{
+  //   needToken:true // 标识:需要携带token
+  // }
+})
 // 根据经纬度获取商铺列表
 export const reqShopList = ({ longitude, latitude }) => ajax({
   method: 'GET',
@@ -42,5 +48,14 @@ export const reqPwdLogin = ({ name, pwd, captcha }) => ajax({
     name,
     pwd,
     captcha
+  }
+})
+
+// 自动登录
+export const reqAutoLogin=()=>ajax({
+  method:'GET',
+  url:BASE+`/auto_login`,
+  headers:{
+    needToken:true // 标识:需要携带token
   }
 })

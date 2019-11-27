@@ -1,24 +1,23 @@
 <template>
   <div>
     <section class="profile">
-      <!-- <header class="header">
-        <a class="header_title">
-          <span class="header_title_text">我的</span>
-        </a>
-      </header> -->
       <Header title="我 的" />
       <section class="profile-number">
-        <a href="javascript:" class="profile-link" @click="$router.push('/login')">
+        <a
+          href="javascript:"
+          class="profile-link"
+          @click="$router.push(user._id?'/userinfo':'/login')"
+        >
           <div class="profile_image">
             <i class="iconfont icon-person"></i>
           </div>
           <div class="user-info">
-            <p class="user-info-top">登录/注册</p>
-            <p>
+            <p class="user-info-top" v-if="!user.phone">{{user.name?user.name:'登录/注册'}}</p>
+            <p v-show="!user.name">
               <span class="user-icon">
                 <i class="iconfont icon-shouji icon-mobile"></i>
               </span>
-              <span class="icon-mobile-number">暂无绑定手机号</span>
+              <span class="icon-mobile-number">{{user.phone?user.phone:'暂无绑定手机号'}}</span>
             </p>
           </div>
           <span class="arrow">
@@ -100,11 +99,32 @@
           </div>
         </a>
       </section>
+      <section class="profile_my_order border-1px">
+        <mt-button style="width:100%" type="danger" v-show="user._id" @click="loginOut">退出</mt-button>
+      </section>
     </section>
   </div>
 </template>
 <script>
-export default {}
+// 引入vuex
+import { mapState } from 'vuex'
+import { MessageBox } from 'mint-ui'
+export default {
+  name: 'Profile',
+  computed: {
+    ...mapState(['user'])
+  },
+  methods: {
+    // 退出操作
+    loginOut() {
+      MessageBox.confirm('确定退出吗?').then(action => {
+        // 退出操作的代码
+        this.$store.dispatch('resetLogin')
+      },action => {
+      })
+    }
+  }
+}
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../../common/stylus/mixins.styl'

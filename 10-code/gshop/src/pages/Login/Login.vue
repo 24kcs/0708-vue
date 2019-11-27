@@ -193,15 +193,16 @@ export default {
               this.captcha='' // 清空图形码
             }
         }
-          console.log(result)
+         // console.log(result)
         // 判断调用接口之后的返回的结果的状态码----code:0
         if(result.code===0){
           // 登录成功
-
+          const user=result.data
           // 保存当前的用户信息
+          this.$store.dispatch('saveUser',user)
 
           // 跳转界面
-          // this.$router.replace('/profile') // 我的  界面
+          this.$router.replace('/profile') // 我的  界面
 
         }else{
           Toast('登录失败')

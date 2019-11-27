@@ -11,6 +11,7 @@ module.exports=function(req,res,next){
     // 直接返回json对象,提示无token,请重新登录
     return res.json({message:'无token,请重新登录'})
   }
+  
   // 此时authorization中带有token,结构token---
   let decoded=jwt.decode(token,'secret')
   // 再次判断token是否存在或者是否过期

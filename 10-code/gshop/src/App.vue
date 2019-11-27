@@ -18,6 +18,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch('getAddress')
+    // 自动登录的操作
+    this.$store.dispatch('autoLogin')
     // this.$store.dispatch('getCategorys')
     // this.$store.dispatch('getShops')
   }
