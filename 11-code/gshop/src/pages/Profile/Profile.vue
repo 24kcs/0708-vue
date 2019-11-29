@@ -112,16 +112,21 @@ import { MessageBox } from 'mint-ui'
 export default {
   name: 'Profile',
   computed: {
-    ...mapState(['user'])
+    // ...mapState(['user'])
+    ...mapState({
+      user: state => state.user.user
+    })
   },
   methods: {
     // 退出操作
     loginOut() {
-      MessageBox.confirm('确定退出吗?').then(action => {
-        // 退出操作的代码
-        this.$store.dispatch('resetLogin')
-      },action => {
-      })
+      MessageBox.confirm('确定退出吗?').then(
+        action => {
+          // 退出操作的代码
+          this.$store.dispatch('resetLogin')
+        },
+        action => {}
+      )
     }
   }
 }

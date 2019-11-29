@@ -54,7 +54,11 @@ export default {
   },
   // 计算属性
   computed: {
-    ...mapState(['address', 'categorys']),
+    // ...mapState(['address', 'categorys']),
+    ...mapState({
+      address:state=>state.msite.address,
+      categorys:state=>state.msite.categorys
+    }),
     // get操作
     categorysArr() {
       // categorys---数组---16条数据

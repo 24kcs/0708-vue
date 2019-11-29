@@ -56,7 +56,10 @@ export default {
   name: 'ShopList',
   computed: {
     // 从Vuex中获取了shops数组数据信息
-    ...mapState(['shops'])
+    // ...mapState(['shops'])
+    ...mapState({
+      shops:state=>state.msite.shops
+    })
   }
 }
 

@@ -23,13 +23,18 @@ export default {
   components: {
     ShopHeader
   },
-  async mounted() {
-    const result1 = await reqGoods()
-    const result2 = await reqRatings()
-    const result3 = await reqInfo()
-    console.log(result1)
-    console.log(result2)
-    console.log(result3)
+  mounted() {
+    this.$store.dispatch('getInfo')
+
+    // this.$store.dispatch('getGoods')
+    // this.$store.dispatch('getRatings')
+    // this.$store.dispatch('getInfo')
+    // const result1 = await reqGoods()
+    // const result2 = await reqRatings()
+    // const result3 = await reqInfo()
+    // console.log(result1)
+    // console.log(result2)
+    // console.log(result3)
   }
 }
 </script>
