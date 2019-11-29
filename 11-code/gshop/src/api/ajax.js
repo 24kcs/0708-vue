@@ -4,7 +4,7 @@ import axios from 'axios'
 import qs from 'qs'
 // 引入store
 import store from '../store'
-import { Toast, MessageBox } from 'mint-ui'
+import { Toast } from 'mint-ui'
 // 引入router
 import router from '../router'
 // 添加请求拦截器
@@ -39,11 +39,10 @@ axios.interceptors.response.use(response => {
   if (!error.response) {
     // 请求的错误
     if (error.status === 401) {
-     
       // 跳转到/login登录界面---先判断是不是login界面---currentRoute当前的路由组件
       if (router.currentRoute.path !== '/login') {
-         // 提示错误信息
-      Toast(error.message)
+        // 提示错误信息
+        Toast(error.message)
         router.replace('/login')
       }
 
@@ -54,12 +53,15 @@ axios.interceptors.response.use(response => {
     const status = error.response.status
     if (status === 401) {
       // token过期了
-      // 提示
-      Toast(error.response.data.message)
-      // 重置token
-      store.dispatch('resetLogin')
-      // 跳转到登录界面
-      router.replace('/login')
+      if (router.currentRoute.path !== '/login') {
+        // 提示
+        Toast(error.response.data.message)
+        // 重置token
+        store.dispatch('resetLogin')
+        // 跳转到登录界面
+        router.replace('/login')
+      }
+
     } else if (status === 404) {
       Toast('没有资源')
     } else {

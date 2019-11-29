@@ -39,11 +39,11 @@ axios.interceptors.response.use(response => {
   if (!error.response) {
     // 请求的错误
     if (error.status === 401) {
-     
+
       // 跳转到/login登录界面---先判断是不是login界面---currentRoute当前的路由组件
       if (router.currentRoute.path !== '/login') {
-         // 提示错误信息
-      Toast(error.message)
+        // 提示错误信息
+        Toast(error.message)
         router.replace('/login')
       }
 
@@ -53,13 +53,15 @@ axios.interceptors.response.use(response => {
     // 获取响应的时候的错误码
     const status = error.response.status
     if (status === 401) {
-      // token过期了
-      // 提示
-      Toast(error.response.data.message)
-      // 重置token
-      store.dispatch('resetLogin')
-      // 跳转到登录界面
-      router.replace('/login')
+      if (router.currentRoute.path !== '/login') {
+        // 提示
+        Toast(error.response.data.message)
+        // 重置token
+        store.dispatch('resetLogin')
+        // 跳转到登录界面
+        router.replace('/login')
+      }
+
     } else if (status === 404) {
       Toast('没有资源')
     } else {
