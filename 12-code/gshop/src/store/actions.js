@@ -3,4 +3,7 @@
 // 引入api
 // import { reqAddress, reqCategorys, reqShopList, reqAutoLogin, reqGoods, reqRatings, reqInfo } from '../api'
 export default {
+  // xxx(){
+  //   console.log('xxx总的actions中的方法')
+  // }
 }

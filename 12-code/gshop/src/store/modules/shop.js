@@ -10,7 +10,9 @@ const state = {
   // 评价的信息
   ratings: [],
   // 商家信息
-  info: {}
+  info: {},
+  // 用来存储购物车中的食物的
+  cartFoods:[]
 }
 const mutations = {
   // 更新点餐信息
@@ -34,6 +36,8 @@ const mutations = {
       // 第一次点击加的时候,添加了这个count属性,并且默认添加了1个属性
       // food.count = 1
       Vue.set(food,'count',1)
+      // 立刻把食物对象添加到数组中
+      state.cartFoods.push(food)
     } else {
       food.count++
     }
@@ -42,6 +46,10 @@ const mutations = {
   [REDUCE_FOOD_COUNT] (state, { food }) {
     if (food.count > 0) {
       food.count--
+      if(food.count===0){
+        // 从食物的数组中删除当前添加的食物
+        state.cartFoods.splice(state.cartFoods.indexOf(food),1)
+      }
     }
   },
 }
@@ -81,9 +89,23 @@ const actions = {
       // 修改操作
       commit(REDUCE_FOOD_COUNT, { food })
     }
-  }
+  },
+  // xxx(){
+  //   console.log('子模块中的action方法')
+  // }
 }
-const getters = {}
+const getters = {
+  // 总数量
+  totalCount(state){
+    return state.cartFoods.reduce((pre,food)=>pre+food.count ,0)
+  },
+  // 总价格
+  totalPrice(state){
+    return state.cartFoods.reduce((pre,food)=>pre+food.count*food.price ,0)
+  },
+
+
+}
 export default {
   state,
   mutations,
