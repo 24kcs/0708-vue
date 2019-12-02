@@ -1,19 +1,23 @@
 <template>
   <div>
     <!--双向数据绑定演示-->
-    <!-- <input type="text" v-model="msg">
-    <p>{{msg}}</p> -->
-    <!--自己实现双向数据绑定-->
-    <!-- <input type="text" :value="msg" @input="msg=$event.target.value">
-    <p>{{msg}}</p> -->
-    <!--组件内实现双向数据绑定-->
+    <!-- <input type="text" v-model="msg" />
+    <p>{{msg}}</p>-->
+    <!--自己实现的双向数据绑定-->
+    <!-- <input type="text" :value="msg" @input="msg=$event.target.value" />
+    <p>{{msg}}</p>-->
+
+    <!--组件上直接使用双向数据绑定的指令v-model是无效的,需要手动的分发-->
     <!-- <Model2 v-model="msg"></Model2>
-    <p>{{msg}}</p> -->
+    <p>{{msg}}</p>-->
 
     <!-- <Model3 :value="msg" @input="msg=$event"></Model3>
     <p>{{msg}}</p> -->
 
-
+<!-- 
+  <Model4 v-model="msg" />
+  <p>{{msg}}</p> -->
+   
   </div>
 </template>
 <script>
@@ -29,6 +33,7 @@
 import Model1 from './Model1.vue'
 import Model2 from './Model2.vue'
 import Model3 from './Model3.vue'
+import Model4 from './Model4.vue'
 export default {
   data() {
     return {
@@ -40,7 +45,8 @@ export default {
   components: {
     Model1,
     Model2,
-    Model3
+    Model3,
+    Model4
   },
   methods: {
     // getMsg(event){

@@ -7,11 +7,11 @@
     <!--组件内容-->
     <!-- <MainComponent /> -->
     <!--事件内容-->
-    <MainEvent/>
+    <!-- <MainEvent/> -->
     <!--双向数据绑定-->
     <!-- <MainModel /> -->
     <!--响应式数据操作-->
-    <!-- <MainReactive /> -->
+    <MainReactive />
   </div>
 </template>
 
