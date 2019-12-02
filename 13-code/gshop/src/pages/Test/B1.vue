@@ -9,33 +9,33 @@
   export default {
 
     // 适用于路由组件没有缓存
-    mounted () {
-      console.log('b1 mounted()')
-      this.timeId = setInterval(() => {
-        console.log('做些事件...111')
-      }, 1000)
-    },
-    // 卸载后干掉定时器
-    beforeDestroy() {
-      clearInterval(this.timeId)
-    },
-
-    // // // 在每次准备进入前
-    // beforeRouteEnter (to, from, next) {
-    //   next(component => {
-    //     component.intervalId = setInterval(() => {
-    //       console.log('做些事件...')
-    //     }, 1000)
-    //   })
+    // mounted () {
+    //   console.log('b1 mounted()')
+    //   this.timeId = setInterval(() => {
+    //     console.log('做些事件...111')
+    //   }, 1000)
+    // },
+    // // 卸载后干掉定时器
+    // beforeDestroy() {
+    //   clearInterval(this.timeId)
     // },
 
-    // // // 在当前组件离开前调用, 可以访问this
-    // beforeRouteLeave (to, from, next) {
+    // // // 在每次准备进入前
+    beforeRouteEnter (to, from, next) {
+      next(component => {
+        component.intervalId = setInterval(() => {
+          console.log('做些事件...')
+        }, 1000)
+      })
+    },
 
-    //   clearInterval(this.intervalId)
+    // // 在当前组件离开前调用, 可以访问this
+    beforeRouteLeave (to, from, next) {
 
-    //   next()
-    // }
+      clearInterval(this.intervalId)
+
+      next()
+    }
 
   }
 </script>

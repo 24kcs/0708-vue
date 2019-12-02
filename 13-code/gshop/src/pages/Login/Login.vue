@@ -208,16 +208,29 @@ export default {
       }
     }
   },
+  // 组件内的路由守卫
   beforeRouteEnter(to, from, next) {
-    // 这里没代码,则在我的界面点击登录,是无法进来的
+    // 该路由守卫,进入到当前组件之前这里的this是undefined,进入组件之前进行守卫,所以,组件实例对象是没有
     next(vm => {
-      // 通过 `vm` 访问组件实例
-      // 登录了去个人中心
-      if(vm.$store.state.user.user._id){
+      // 放行之后vm才是你的组件实例对象
+      // console.log(vm)
+      // 如果登录去我的界面
+      if (vm.$store.state.user.user._id) {
         next('/profile')
       }
     })
   }
+
+  // beforeRouteEnter(to, from, next) {
+  //   // 这里没代码,则在我的界面点击登录,是无法进来的
+  //   next(vm => {
+  //     // 通过 `vm` 访问组件实例
+  //     // 登录了去个人中心
+  //     if(vm.$store.state.user.user._id){
+  //       next('/profile')
+  //     }
+  //   })
+  // }
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

@@ -16,15 +16,19 @@ import { Button } from 'mint-ui';
 import './mock/mock-server.js'
 // 引入CartControl
 import CartControl from './components/CartControl/CartControl.vue'
-// 图片懒加载
+
+import './filter'
+
+// 引入图片懒加载的插件
 import VueLazyload from 'vue-lazyload'
 // 引入图片
 import loading from './common/images/loading.gif'
-import './filter'
-// 声明使用图片懒加载插件
+// 声明使用懒加载的插件
 Vue.use(VueLazyload, {
   loading
 })
+
+
 Vue.prototype.$bus=new Vue()
 // 注册成全局组件(在任何组件中可以直接使用,可以叫公共组件)
 Vue.component(Header.name, Header)

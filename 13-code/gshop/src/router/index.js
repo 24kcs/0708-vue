@@ -8,29 +8,28 @@ import store from '../store'
 // 声明使用插件
 Vue.use(VueRouter)
 // 暴露路由器
-const router = new VueRouter({
+const router= new VueRouter({
   mode: 'history',
   routes
 })
+
+// 全局前置路由守卫
 // const paths=['/goone','/gotwo']
 // router.beforeEach((to, from, next) => {
-//   // to--->目标路由,要去哪里
-//   console.log(to)
-//   console.log(from)
+ 
+//   // console.log(to)   to: 要去哪里---->目标
+//   // console.log(from) from:从哪里来---->路由离开的对象(对应的路径)
 
-//   // 如果去goone或者gotwo则去登录界面
-//   // if(paths.indexOf(to.path)!==-1){
-//   //   next('/login')
-//   // }
-//   // 没有登录则去登录界面,否则放行
-//    if(paths.indexOf(to.path)!==-1){
+//   // 判断
+//   if(paths.indexOf(to.path)!==-1){
+//     // 需求1:如果你要去goone或者gotwo中任何一个路径,直接跳转到登录
+//     // router.push('/login')
+//     // 去登录
 //     if(!store.state.user.user._id){
-//       next('/login')
+//       router.push('/login')
 //     }
-   
 //   }
 //   // 放行
 //   next()
 // })
-
-export default router 
+ export default router 
